@@ -1,11 +1,19 @@
-// import express from 'express'
 const express = require('express')
-// import pokemons from './mock-pokemon'
-const pokemons = require('./mock-pokemon')
 const {success} = require('./helper')
+let pokemons = require('./mock-pokemon')
 
 const app = express()
 const port = 3000
+
+// const logger = (req, res, next) => {
+//     console.log(`URL : ${req.url}`)
+// }
+
+// app.use(logger)
+
+// app.use((req, res, next) => {
+//     console.log(`URL ${req.url}`)
+// })
 
 app.get('/', (req, res) => res.send('Hello Express'))
 
