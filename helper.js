@@ -1,7 +1,6 @@
 
-exports.success = (message, data) => {
+export const success = (message, data) => {
     // Avec le raccourci de syntaxe ECMAScript6
-    return {message, data}
+    return { message, data }
 }
 
-exports.success
