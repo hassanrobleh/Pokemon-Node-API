@@ -1,19 +1,17 @@
 import express from 'express'
-import {success} from './helper.js'
+import {success, getUniquedId} from './helper.js'
 import pokemons from './mock-pokemon.js'
+
+// const express = require('express')
+// const { success, getUniquedId } = require('./helper.js')
+// let pokemons = require('./mock-pokemon')
 
 const app = express()
 const port = 3000
 
-// const logger = (req, res, next) => {
-//     console.log(`URL : ${req.url}`)
-// }
-
-// app.use(logger)
-
-// app.use((req, res, next) => {
-//     console.log(`URL ${req.url}`)
-// })
+// Middleware
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => res.send('Hello Express'))
 
@@ -30,12 +28,25 @@ app.get('/api/pokemons', (req, res) => {
 })
 
 app.post('/api/pokemons', (req, res) => {
-    const id = 123
+    const id = getUniquedId(pokemons)
     const pokemonCreated = { ...req.body, ...{id: id, created: new Date()}}
     pokemons.push(pokemonCreated)
-    const message = `Le pokemon ${pokemonCreated} a bien été ajouté`
+    const message = `Le pokemon ${pokemonCreated.name} a bien été ajouté`
     res.json(success(message, pokemonCreated))
 })
 
+app.put('/api/pokemons/:id', (req, res) => {
+    const id = parseInt(req.params.id)
+    //let pokemonUpdated = pokemons.find(pokemon => pokemon.id === id)
+    
+    let pokemonUpdated = { ...req.body, id: id }
+
+    pokemons.map(pokemon => {
+        return pokemon.id === id ? pokemonUpdated : pokemon
+    })
+
+    const message = `Le pokemon ${pokemonUpdated.name} a bien été modifié`
+    res.json(success(message, pokemonUpdated))
+})
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
