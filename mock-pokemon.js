@@ -110,3 +110,4 @@ const pokemons = [
    ];
      
    export default pokemons
+// module.exports =  pokemons

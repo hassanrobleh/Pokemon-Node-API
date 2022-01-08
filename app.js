@@ -37,15 +37,23 @@ app.post('/api/pokemons', (req, res) => {
 
 app.put('/api/pokemons/:id', (req, res) => {
     const id = parseInt(req.params.id)
-    //let pokemonUpdated = pokemons.find(pokemon => pokemon.id === id)
     
-    let pokemonUpdated = { ...req.body, id: id }
+    // const pokemonUpdated = {...req.body, id: id}
+    const {name} = req.body
+    
+    const pokemon = pokemons.find(pokemon => pokemon.id === id)
 
-    pokemons.map(pokemon => {
-        return pokemon.id === id ? pokemonUpdated : pokemon
+    const pokemonUpdated = pokemons.map(pokemon => {
+        if(pokemon.id === id) {
+            pokemon.name = name
+        }
+        
+        return pokemon
     })
+    
+    // console.log(pokemonUpdated)
 
-    const message = `Le pokemon ${pokemonUpdated.name} a bien été modifié`
+    const message = `Le pokemon ${pokemon.name} a bien été modifié`
     res.json(success(message, pokemonUpdated))
 })
 
