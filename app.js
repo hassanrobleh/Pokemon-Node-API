@@ -57,10 +57,10 @@ app.put('/api/pokemons/:id', (req, res) => {
 
 app.delete('/api/pokemons/:id', (req, res) => {
     const id = parseInt(req.params.id)
-    const pokemon = pokemons.find(pokemon => pokemon.id === id)
-    const pokemonDelete = pokemons.filter(pokemon => pokemon.id !== id)
+    const pokemonDelete = pokemons.find(pokemon => pokemon.id === id)
+    pokemons.filter(pokemon => pokemon.id !== id)
 
-    const message = `Le pokemon ${pokemon.name} a bien été supprimé`
+    const message = `Le pokemon ${pokemonDelete.name} a bien été supprimé`
     res.json(success(message, pokemonDelete))
 })
 
