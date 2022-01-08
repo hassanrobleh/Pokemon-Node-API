@@ -31,15 +31,19 @@ app.post('/api/pokemons', (req, res) => {
     const id = getUniquedId(pokemons)
     const pokemonCreated = { ...req.body, ...{id: id, created: new Date()}}
     pokemons.push(pokemonCreated)
-    
+
     const message = `Le pokemon ${pokemonCreated.name} a bien été ajouté`
     res.json(success(message, pokemonCreated))
 })
 
 app.put('/api/pokemons/:id', (req, res) => {
     const id = parseInt(req.params.id)
-    const {name} = req.body 
-    const pokemon = pokemons.find(pokemon => pokemon.id === id)
+
+    // const pokemonUpdated = {...req.body}
+    const {name} = req.body
+   
+    let pokemon = pokemons.find(pokemon => pokemon.id === id)
+
     const pokemonUpdated = pokemons.map(pokemon => {
         if(pokemon.id === id) {
             pokemon.name = name
@@ -49,6 +53,15 @@ app.put('/api/pokemons/:id', (req, res) => {
     
     const message = `Le pokemon ${pokemon.name} a bien été modifié`
     res.json(success(message, pokemonUpdated))
+})
+
+app.delete('/api/pokemons/:id', (req, res) => {
+    const id = parseInt(req.params.id)
+    const pokemon = pokemons.find(pokemon => pokemon.id === id)
+    const pokemonDelete = pokemons.filter(pokemon => pokemon.id !== id)
+
+    const message = `Le pokemon ${pokemon.name} a bien été supprimé`
+    res.json(success(message, pokemonDelete))
 })
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
