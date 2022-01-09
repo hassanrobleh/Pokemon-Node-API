@@ -1,4 +1,5 @@
 import express from 'express'
+import { Sequelize } from 'sequelize'
 import {success, getUniquedId} from './helper.js'
 import pokemons from './mock-pokemon.js'
 
@@ -8,6 +9,24 @@ import pokemons from './mock-pokemon.js'
 
 const app = express()
 const port = 3000
+
+const sequelize = new Sequelize(
+    'pokedax',
+    'root',
+    'root',
+    {
+        host: 'localhost',
+        dialect: 'mysql',
+        dialectOptions: {
+            timezone: 'Etc/GMT-2'
+        },
+        logging: false
+    }
+);
+
+sequelize.authenticate()
+    .then(_ => console.log('La connexion à la base de données a bien été établie.'))
+    .catch(error => console.log(`Impossible de se connecter à la base de données ${error}`))
 
 // Middleware
 app.use(express.json())

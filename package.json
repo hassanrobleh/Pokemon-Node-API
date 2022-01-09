@@ -12,7 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.12.5",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
