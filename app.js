@@ -1,6 +1,7 @@
 import express from 'express'
 import favicon from 'serve-favicon'
 import sequelize from './src/db/squelize.js'
+import findAllPokemons from './src/routes/findAllPokemons'
 // import { DataTypes, Sequelize } from 'sequelize'
 // import {success, getUniquedId} from './helper.js'
 // import pokemons from './src/db/mock-pokemon.js'
@@ -12,6 +13,8 @@ import sequelize from './src/db/squelize.js'
 
 const app = express()
 const port = 3000
+
+
 
 // const sequelize = new Sequelize(
 //     'pokedax',
@@ -105,5 +108,7 @@ app.use(favicon(__dirname + 'favicon.ico'))
 sequelize.initDb()
 
 // ici, Nous plaçons nos futurs points de terminaisons.
+
+findAllPokemons(app)
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
