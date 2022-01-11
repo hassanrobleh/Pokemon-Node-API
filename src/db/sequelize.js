@@ -1,18 +1,7 @@
-
 import { Sequelize, DataTypes } from 'sequelize'
-// const PokemonModel = require('../models/pokemon')
-import PokemonModel from './src/models/pokemon.js'
-// const pokemons = require('./mock-pokemon')
-import pokemons from './src/db/mock-pokemon.js'
+import PokemonModel from '../models/pokemon.js'
+import pokemons from './mock-pokemon.js'
 
-// const sequelize = new Sequelize('pokedex', 'root', '', {
-//   host: 'localhost',
-//   dialect: 'mariadb',
-//   dialectOptions: {
-//     timezone: 'Etc/GMT-2',
-//   },
-//   logging: false
-// })
 const sequelize = new Sequelize('pokedax', 'root', 'root', {
     host: 'localhost',
     dialect: 'mysql',
@@ -32,15 +21,11 @@ export const initDb = () => {
         hp: pokemon.hp,
         cp: pokemon.cp,
         picture: pokemon.picture,
-        types: pokemon.types.join()
+        types: pokemon.types,
       }).then(pokemon => console.log(pokemon.toJSON()))
     })
+    
     console.log('La base de donnée a bien été initialisée !')
   })
 }
   
-// module.exports = { 
-//   initDb, Pokemon
-// }
-// export default initDb
-// export default Pokemon

@@ -1,13 +1,14 @@
+import { Pokemon } from '../db/sequelize.js'
 
-
-import {Pokemon} from '../db/squelize.js'
-
-export const findAllPokemons = (app) => {
-    app.get('/pokemon/api', (req, res) => {
+const findAllPokemons = (app) => {
+    app.get('/api/pokemons', (req, res) => {
         Pokemon.findAll()
-            .then(pokemons => {
-                const message = `La liste pokemon a bien été récupérée`
-                res.json({message, data: pokemons})
-            })
+          .then(pokemons => {
+            const message = 'La liste des pokémons a bien été récupérée.'
+            res.json({ message, data: pokemons })
+        })
+        .catch(err => console.log(err))
     })
 }
+
+export default findAllPokemons
