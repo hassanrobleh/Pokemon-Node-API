@@ -4,6 +4,7 @@ import findAllPokemons from './src/routes/findAllPokemons.js'
 import findPokemonByPK from './src/routes/findPokemonByPK.js'
 import createPokemon from './src/routes/createPokemon.js'
 import updatePokemon from './src/routes/updatePokemon.js'
+import deledePokemon from './src/routes/deletePokemon.js'
 
 // import path from 'path';
 // import favicon from 'serve-favicon'
@@ -23,5 +24,7 @@ findAllPokemons(app)
 findPokemonByPK(app)
 createPokemon(app)
 updatePokemon(app)
+deledePokemon(app)
+
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
