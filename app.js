@@ -3,6 +3,7 @@ import { initDb } from './src/db/sequelize.js'
 import findAllPokemons from './src/routes/findAllPokemons.js'
 import findPokemonByPK from './src/routes/findPokemonByPK.js'
 import createPokemon from './src/routes/createPokemon.js'
+import updatePokemon from './src/routes/updatePokemon.js'
 
 // import path from 'path';
 // import favicon from 'serve-favicon'
@@ -21,5 +22,6 @@ initDb()
 findAllPokemons(app)
 findPokemonByPK(app)
 createPokemon(app)
+updatePokemon(app)
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
