@@ -19,7 +19,15 @@ const PokemonModel = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           isInt: { msg: "Utilisez uniquement des nombres entiers pour les points de vie."},
-          notNull: {msg: 'Les points de vie sont une propriété requise.'}
+          min: {
+            args: [0],
+            msg: "Les points de vie doivent être supérieurs ou égales à 0."
+          },
+          max: {
+            args: [999],
+            msg: "Les points de vie doivent être inférieurs ou égales à 999."
+          },
+          notNull: {msg: 'Les points de vie sont une propriété requise.'},
         }
       },
       cp: {
@@ -27,7 +35,15 @@ const PokemonModel = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           isInt: { msg: "Utilisez uniquement des nombres entiers pour les points dégât."},
-          notNull: {msg: 'Les points dégâts sont une propriété requise.'}
+          min: {
+            args: [0],
+            msg: "Les points de vie doivent être supérieurs ou égales à 0."
+          },
+          max: {
+            args: [99],
+            msg: "Les points de vie doivent être inférieurs ou égales à 99."
+          },
+          notNull: {msg: 'Les points dégâts sont une propriété requise.'},
         }
       },
       picture: {
