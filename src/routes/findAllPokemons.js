@@ -5,21 +5,31 @@ const findAllPokemons = (app) => {
     app.get('/api/pokemons', (req, res) => {
         if(req.query.name) {
             const name = req.query.name
+            const limit = parseInt(req.query.limit) || 5
             // return Pokemon.findAll({ where : {name: name}})
-            return Pokemon.findAll({ 
+            // return Pokemon.findAll({ 
+            if(name.length < 2) {
+                const message = `Le terme de recherche doit contenir au moins 2 caractères.`
+                res.status(400).json({message})
+            }
+            
+            return Pokemon.findAndCountAll({ 
                 where: { 
-                    name: { // 'name' est la propriété du modèle pokémon
+                    name: {  // 'name' est la propriété du modèle pokémon
                         //[Op.eq]: name // 'name' est le critère de la recherche
                         [Op.like]: `%${name}%` // 'name' est le critère de la recherche
                     }
-                }
+                },
+                order: ['name'],
+                limit: limit
             })
-            .then(pokemons => {
-                const message = ` Il y a ${pokemons.length} pokémons qui correspondent au terme de recherche ${name}`
-                res.json({message, data: pokemons})
+            // .then(pokemons => {
+            .then(({count, rows}) => {
+                const message = ` Il y a ${count} pokémons qui correspondent au terme de recherche ${name}`
+                res.json({message, data: rows})
             })
         } else {
-            Pokemon.findAll()
+            Pokemon.findAll({order: ['name']})
             .then(pokemons => {
                 const message = 'La liste des pokémons a bien été récupérée.'
                 res.json({ message, data: pokemons })
