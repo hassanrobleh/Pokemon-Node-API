@@ -1,4 +1,4 @@
-import { ValidationError } from 'sequelize'
+import { UniqueConstraintError, ValidationError } from 'sequelize'
 import { Pokemon } from '../db/sequelize.js'
 
 const createPokemon = (app) => {
@@ -8,10 +8,13 @@ const createPokemon = (app) => {
         const message = `Le pokémon ${req.body.name} a bien été crée.`
         res.json({ message, data: pokemon })
       })
-      .catch(err => {
+      .catch(error => {
         if(error instanceof ValidationError) {
           return res.status(400).json({message: error.message, data: error})
         }
+		if(error instanceof UniqueConstraintError) {
+			return res.status(400).json({message: error.message, data: error})
+		}
         const message = `Le pokémon n'a pas pu être ajouté. Réessayez plutard`
         res.status(500).json({message, data: err})
     })
