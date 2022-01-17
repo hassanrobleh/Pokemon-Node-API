@@ -1,5 +1,6 @@
 import { Sequelize, DataTypes } from 'sequelize'
 import PokemonModel from '../models/pokemon.js'
+import PokemonUser from '../models/user.js'
 import pokemons from './mock-pokemon.js'
 
 const sequelize = new Sequelize('pokedax', 'root', 'root', {
@@ -12,9 +13,11 @@ const sequelize = new Sequelize('pokedax', 'root', 'root', {
 });
   
 export const Pokemon = PokemonModel(sequelize, DataTypes)
+export const User = PokemonUser(sequelize, DataTypes)
   
 export const initDb = () => {
   return sequelize.sync({force: true}).then(_ => {
+    console.log('INIT DB')
     pokemons.map(pokemon => {
       Pokemon.create({
         name: pokemon.name,
@@ -24,6 +27,11 @@ export const initDb = () => {
         types: pokemon.types,
       }).then(pokemon => console.log(pokemon.toJSON()))
     })
+
+    User.create({
+      username: 'pikachu',
+      password: 'pikachu'
+    }).then(user => console.log(user.toJSON()))
     
     console.log('La base de donnée a bien été initialisée !')
   })

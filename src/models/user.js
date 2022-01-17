@@ -7,7 +7,10 @@ const PokemonUser = (sequelize, DataTypes) => {
         autoIncrement: true
       },
       username: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        unique: {
+            msg: 'Le nom est déjâ pris.'
+        }
       },
       password: {
         type: DataTypes.STRING
