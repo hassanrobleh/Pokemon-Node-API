@@ -2,6 +2,7 @@ import { Sequelize, DataTypes } from 'sequelize'
 import PokemonModel from '../models/pokemon.js'
 import PokemonUser from '../models/user.js'
 import pokemons from './mock-pokemon.js'
+import bcrypt from 'bcrypt'
 
 const sequelize = new Sequelize('pokedax', 'root', 'root', {
     host: 'localhost',
@@ -28,10 +29,13 @@ export const initDb = () => {
       }).then(pokemon => console.log(pokemon.toJSON()))
     })
 
-    User.create({
-      username: 'pikachu',
-      password: 'pikachu'
-    }).then(user => console.log(user.toJSON()))
+    bcrypt.hash('pikachu', 10)
+    .then(hash => {
+      User.create({
+        username: 'pikachu', 
+        password: hash
+      }).then(user => console.log(user.toJSON()))
+    })
     
     console.log('La base de donnée a bien été initialisée !')
   })
