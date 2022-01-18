@@ -1,8 +1,9 @@
 import { UniqueConstraintError, ValidationError } from 'sequelize'
 import { Pokemon } from '../db/sequelize.js'
+import auth from '../auth/auth.js'
 
 const updatePokemon = (app) => {
-    app.put('/api/pokemons/:id', (req, res) => {
+    app.put('/api/pokemons/:id', auth, (req, res) => {
         const id = req.params.id
         Pokemon.update(req.body, {
             where: { id: id }

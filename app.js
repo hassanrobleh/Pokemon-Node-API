@@ -5,6 +5,7 @@ import findPokemonByPK from './src/routes/findPokemonByPK.js'
 import createPokemon from './src/routes/createPokemon.js'
 import updatePokemon from './src/routes/updatePokemon.js'
 import deledePokemon from './src/routes/deletePokemon.js'
+import login from './src/routes/login.js'
 // import res from 'express/lib/response'
 
 // import path from 'path';
@@ -26,6 +27,8 @@ findPokemonByPK(app)
 createPokemon(app)
 updatePokemon(app)
 deledePokemon(app)
+login(app)
+
 
 // On ajoute la gestion des erreurs 404
 app.use(({res}) => {
