@@ -1,5 +1,7 @@
 import { User } from '../db/sequelize.js'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import privateKey from '../auth/private_key.js'
 
 const login = (app) => {
     app.post('/api/login', (req, res) => {
@@ -12,11 +14,20 @@ const login = (app) => {
                 if(!isPasswordValid) {
                     const message = `Le mot de passe est incorrect.`
                     return res.status(401).json({message, data: user})
-                } else {
-                    const message = `L'utilisateur a été connecté avec succès`
-                    return res.json({message, data: user})
-                }
+                } 
+
+                //JWT
+                const token = jwt.sign(
+                    { userId: user.id },
+                    privateKey,
+                    { expiresIn: '24' }
+                )
+
+                const message = `L'utilisateur a été connecté avec succès`
+                return res.json({message, data: user, token})
             })
+
+
         }).catch(error => {
             const message = `L'utilisateur a pas pu être connecté. Réessayez plutard.`
             res.status(500).json({message, data: error})
