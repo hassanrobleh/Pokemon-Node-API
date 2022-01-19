@@ -1,4 +1,6 @@
 import express from 'express'
+import favicon from 'serve-favicon'
+import path from 'path';
 import { initDb } from './src/db/sequelize.js'
 import findAllPokemons from './src/routes/findAllPokemons.js'
 import findPokemonByPK from './src/routes/findPokemonByPK.js'
@@ -6,17 +8,16 @@ import createPokemon from './src/routes/createPokemon.js'
 import updatePokemon from './src/routes/updatePokemon.js'
 import deledePokemon from './src/routes/deletePokemon.js'
 import login from './src/routes/login.js'
-// import res from 'express/lib/response'
 
-// import path from 'path';
-// import favicon from 'serve-favicon'
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
+const __dirname = path.resolve();
 
 // Middleware
-app.use(express.json())
+app.use(favicon(path.join(__dirname, 'favicon.ico')))
+   .use(express.json())
    .use(express.urlencoded({ extended: true }))
 
 initDb()
