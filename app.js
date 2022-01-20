@@ -9,10 +9,8 @@ import updatePokemon from './src/routes/updatePokemon.js'
 import deledePokemon from './src/routes/deletePokemon.js'
 import login from './src/routes/login.js'
 
-
 const app = express()
 const port = process.env.PORT || 3000
-
 const __dirname = path.resolve();
 
 // Middleware
