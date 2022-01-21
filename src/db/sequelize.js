@@ -4,20 +4,33 @@ import PokemonUser from '../models/user.js'
 import pokemons from './mock-pokemon.js'
 import bcrypt from 'bcrypt'
 
-const sequelize = new Sequelize('pokedax', 'root', 'root', {
-    host: 'localhost',
+let sequelize
+
+if(process.env.NODE_ENV === 'production') {
+  sequelize = new Sequelize('fs739rhb9w9ts5hf', 'ujfpyptvcvcwa1li', 'tfyptadj28rklcs3', {
+    host: 'kutnpvrhom7lki7u.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
     dialect: 'mysql',
     dialectOptions: {
-        timezone: 'Etc/GMT-2'
+      timezone: 'Etc/GMT-2'
+    },
+    logging: true
+  })
+} else {
+  sequelize = new Sequelize('pokedax', 'root', 'root', {
+  host: 'localhost',
+  dialect: 'mysql',
+  dialectOptions: {
+      timezone: 'Etc/GMT-2'
     },
     logging: false
-});
-  
+  })      
+}
+
 export const Pokemon = PokemonModel(sequelize, DataTypes)
 export const User = PokemonUser(sequelize, DataTypes)
   
 export const initDb = () => {
-  return sequelize.sync({force: true}).then(_ => {
+  return sequelize.sync().then(_ => {
     console.log('INIT DB')
     pokemons.map(pokemon => {
       Pokemon.create({
