@@ -1,8 +1,8 @@
 import express from 'express'
 import favicon from 'serve-favicon'
-import path from 'path';
+import path from 'path'
 import { initDb } from './src/db/sequelize.js'
-import cors from 'cors',
+import cors from 'cors'
 import findAllPokemons from './src/routes/findAllPokemons.js'
 import findPokemonByPK from './src/routes/findPokemonByPK.js'
 import createPokemon from './src/routes/createPokemon.js'
