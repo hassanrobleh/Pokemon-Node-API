@@ -21,7 +21,7 @@ app.use(favicon(path.join(__dirname, 'favicon.ico')))
 initDb()
 
 app.get('/', (req, res) => {
-   res.json('Hello, Heroku :)')
+   res.json('Hello Heroku')
 })
 
 // ici, Nous plaçons nos futurs points de terminaisons.
