@@ -2,7 +2,7 @@ import { Pokemon } from '../db/sequelize.js'
 import auth from '../auth/auth.js'
 
 const findPokemonByPk = (app) => {
-    app.get('/api/pokemons/:id', auth, (req, res) => {
+    app.get('/api/pokemons/:id', (req, res) => {
         Pokemon.findByPk(req.params.id)
          .then(pokemon => {
             if(pokemon === null) {

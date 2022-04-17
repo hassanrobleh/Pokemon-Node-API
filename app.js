@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
    res.json('Hello Heroku')
 })
 
-// ici, Nous plaçons nos futurs points de terminaisons.
+// ici, Nous plaçons nos futurs points de terminaisons (end point).
 findAllPokemons(app)
 findPokemonByPK(app)
 createPokemon(app)
