@@ -3,7 +3,7 @@
 # Getting Started
 
 ```bash
-$ git clone https://github.com/hassanrobleh/Pokemon-Node-API.git
+$ git clone 
 $ cd Pokemon-Node-API
 $ npm install
 $ npm run dev
