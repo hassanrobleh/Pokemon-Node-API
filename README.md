@@ -6,4 +6,4 @@
 $ git clone https://github.com/hassanrobleh/Pokemon-Node-API.git
 $ cd Pokemon-Node-API
 $ npm install 
-$ npm run dev
+$ npm run 
