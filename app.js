@@ -9,7 +9,7 @@ import createPokemon from './src/routes/createPokemon.js'
 import updatePokemon from './src/routes/updatePokemon.js'
 import deledePokemon from './src/routes/deletePokemon.js'
 import login from './src/routes/login.js'
-import login from './src/routes/login.js'
+
 
 const app = express()
 const port = process.env.PORT || 3000
